@@ -21,7 +21,7 @@ public class CustomerService {
 				int lastCustomerId = (int) Collections.max(custIdSet);
 				int newCustomerId = lastCustomerId + 1;
 				custMap.put(newCustomerId,
-						new Customer(customer.getFname(), customer.getLname(), customer.getAddress()));
+						new Customer(customer.getId(), customer.getFname(), customer.getLname(), customer.getAddress()));
 				custIdSet.add(newCustomerId);
 			}
 
@@ -42,6 +42,14 @@ public class CustomerService {
 
 	public String getAllCustomers() {
 		return custMap.values().toString();
+	}
+
+	public Customer getCustomerById(int custId) {
+		if(custIdSet.contains(custId)) {
+			return custMap.get(custId);
+		} else {
+			return null;
+		}
 	}
 
 	public boolean updateCustomerById(int custId, Customer updatedValues) {
