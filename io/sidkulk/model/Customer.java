@@ -30,13 +30,25 @@ public class Customer {
 	public String getAddress() {
 		return this.address;
 	}
-	
+
 	public String getLname() {
 		return this.lname;
 	}
 
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	@Override
-	public String toString() {	
+	public String toString() {
 		return this.id + " | " + this.fname + " | " + this.lname + " | " + this.address;
 	}
 }
