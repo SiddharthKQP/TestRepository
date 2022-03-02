@@ -1,4 +1,4 @@
-package io.sidkulk;
+package io.sidkulk.services;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,10 +15,16 @@ public class CustomerService {
 		if (customer == null) {
 			return false;
 		} else {
-			int lastCustomerId = (int) Collections.max(custIdSet);
-			int newCustomerId = lastCustomerId + 1;
-			custMap.put(newCustomerId, new Customer(customer.getFname(), customer.getLname(), customer.getAddress()));
-			custIdSet.add(newCustomerId);
+			if (custIdSet.isEmpty()) {
+				custIdSet.add(1);
+			} else {
+				int lastCustomerId = (int) Collections.max(custIdSet);
+				int newCustomerId = lastCustomerId + 1;
+				custMap.put(newCustomerId,
+						new Customer(customer.getFname(), customer.getLname(), customer.getAddress()));
+				custIdSet.add(newCustomerId);
+			}
+
 			return true;
 		}
 	}
@@ -34,6 +40,10 @@ public class CustomerService {
 		}
 	}
 
+	public String getAllCustomers() {
+		return custMap.values().toString();
+	}
+
 	public boolean updateCustomerById(int custId, Customer updatedValues) {
 		boolean isIdPresent = custMap.containsKey(custId);
 		if (isIdPresent) {
@@ -47,5 +57,9 @@ public class CustomerService {
 		} else {
 			return false;
 		}
+	}
+
+	public Set<Integer> getAllCustomerIDs() {
+		return custIdSet;
 	}
 }
